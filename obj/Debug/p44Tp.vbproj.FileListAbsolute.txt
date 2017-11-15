@@ -1,0 +1,14 @@
+C:\Alexandre Dupont\P44\p44Tp\bin\Debug\p44Tp.exe.config
+C:\Alexandre Dupont\P44\p44Tp\bin\Debug\p44Tp.exe
+C:\Alexandre Dupont\P44\p44Tp\bin\Debug\p44Tp.pdb
+C:\Alexandre Dupont\P44\p44Tp\bin\Debug\p44Tp.xml
+C:\Alexandre Dupont\P44\p44Tp\obj\Debug\p44Tp.vbprojResolveAssemblyReference.cache
+C:\Alexandre Dupont\P44\p44Tp\obj\Debug\p44Tp.frmEtudiants.resources
+C:\Alexandre Dupont\P44\p44Tp\obj\Debug\p44Tp.frmMenu.resources
+C:\Alexandre Dupont\P44\p44Tp\obj\Debug\p44Tp.frmProgramme.resources
+C:\Alexandre Dupont\P44\p44Tp\obj\Debug\p44Tp.Resources.resources
+C:\Alexandre Dupont\P44\p44Tp\obj\Debug\p44Tp.vbproj.GenerateResource.Cache
+C:\Alexandre Dupont\P44\p44Tp\obj\Debug\p44Tp.vbproj.CoreCompileInputs.cache
+C:\Alexandre Dupont\P44\p44Tp\obj\Debug\p44Tp.exe
+C:\Alexandre Dupont\P44\p44Tp\obj\Debug\p44Tp.xml
+C:\Alexandre Dupont\P44\p44Tp\obj\Debug\p44Tp.pdb

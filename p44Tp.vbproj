@@ -72,6 +72,16 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DsEtudiants.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsEtudiants.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DsProgramme.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsProgramme.xsd</DependentUpon>
+    </Compile>
     <Compile Include="frmEtudiants.Designer.vb">
       <DependentUpon>frmEtudiants.vb</DependentUpon>
     </Compile>
@@ -125,6 +135,28 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="DsEtudiants.xsc">
+      <DependentUpon>DsEtudiants.xsd</DependentUpon>
+    </None>
+    <None Include="DsEtudiants.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsEtudiants.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DsEtudiants.xss">
+      <DependentUpon>DsEtudiants.xsd</DependentUpon>
+    </None>
+    <None Include="DsProgramme.xsc">
+      <DependentUpon>DsProgramme.xsd</DependentUpon>
+    </None>
+    <None Include="DsProgramme.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsProgramme.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DsProgramme.xss">
+      <DependentUpon>DsProgramme.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

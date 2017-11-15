@@ -27,4 +27,13 @@
         cmdOK.Enabled = Lock
         cmdNouveau.Enabled = Not Lock
     End Sub
+
+    Private Sub frmProgramme_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        daProgramme.Fill(DsProgramme1.T_programme)
+        'daEtudiants.Fill(DsProgramme1.T_etudiants)
+    End Sub
+
+    Private Sub dgProgramme_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgProgramme.CellContentClick
+
+    End Sub
 End Class
