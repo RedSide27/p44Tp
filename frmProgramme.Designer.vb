@@ -31,6 +31,8 @@ Partial Class frmProgramme
         Me.cmdNouveau = New System.Windows.Forms.Button()
         Me.grpProgramme = New System.Windows.Forms.GroupBox()
         Me.txtno = New System.Windows.Forms.MaskedTextBox()
+        Me.ProgrammeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DsProgramme1 = New p44Tp.DsProgramme()
         Me.txtNbrHeure = New System.Windows.Forms.TextBox()
         Me.txtNbrUnites = New System.Windows.Forms.TextBox()
         Me.txtNom = New System.Windows.Forms.TextBox()
@@ -39,35 +41,35 @@ Partial Class frmProgramme
         Me.lblNom = New System.Windows.Forms.Label()
         Me.lblNo = New System.Windows.Forms.Label()
         Me.dgProgramme = New System.Windows.Forms.DataGridView()
+        Me.PronoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PronomDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PronbrunitesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PronbrheuresDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SqlSelectCommand1 = New System.Data.SqlClient.SqlCommand()
+        Me.cnProgramme = New System.Data.SqlClient.SqlConnection()
         Me.SqlInsertCommand1 = New System.Data.SqlClient.SqlCommand()
         Me.SqlUpdateCommand1 = New System.Data.SqlClient.SqlCommand()
         Me.SqlDeleteCommand1 = New System.Data.SqlClient.SqlCommand()
         Me.daProgramme = New System.Data.SqlClient.SqlDataAdapter()
-        Me.cnProgramme = New System.Data.SqlClient.SqlConnection()
         Me.SqlSelectCommand2 = New System.Data.SqlClient.SqlCommand()
         Me.SqlInsertCommand2 = New System.Data.SqlClient.SqlCommand()
         Me.SqlUpdateCommand2 = New System.Data.SqlClient.SqlCommand()
         Me.SqlDeleteCommand2 = New System.Data.SqlClient.SqlCommand()
         Me.daEtudiants = New System.Data.SqlClient.SqlDataAdapter()
-        Me.ProgrammeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgEtudiants = New System.Windows.Forms.DataGridView()
-        Me.TetudiantsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DsProgramme1 = New p44Tp.DsProgramme()
-        Me.PronoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PronomDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PronbrunitesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PronbrheuresDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EtudaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PronoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EtuprenomDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EtunomDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TetudiantsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Err1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.grpProgramme.SuspendLayout()
-        CType(Me.dgProgramme, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProgrammeBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DsProgramme1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgProgramme, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgEtudiants, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TetudiantsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DsProgramme1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Err1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'cmdEnlever
@@ -144,6 +146,16 @@ Partial Class frmProgramme
         Me.txtno.Size = New System.Drawing.Size(126, 29)
         Me.txtno.TabIndex = 9
         '
+        'ProgrammeBindingSource
+        '
+        Me.ProgrammeBindingSource.DataMember = "T_programme"
+        Me.ProgrammeBindingSource.DataSource = Me.DsProgramme1
+        '
+        'DsProgramme1
+        '
+        Me.DsProgramme1.DataSetName = "DsProgramme"
+        Me.DsProgramme1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'txtNbrHeure
         '
         Me.txtNbrHeure.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.ProgrammeBindingSource, "pro_nbr_heures", True))
@@ -212,18 +224,56 @@ Partial Class frmProgramme
         Me.dgProgramme.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgProgramme.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgProgramme.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PronoDataGridViewTextBoxColumn, Me.PronomDataGridViewTextBoxColumn, Me.PronbrunitesDataGridViewTextBoxColumn, Me.PronbrheuresDataGridViewTextBoxColumn})
+        Me.dgProgramme.DataBindings.Add(New System.Windows.Forms.Binding("Tag", Me.ProgrammeBindingSource, "pro_no", True))
         Me.dgProgramme.DataSource = Me.ProgrammeBindingSource
         Me.dgProgramme.Location = New System.Drawing.Point(12, 237)
         Me.dgProgramme.Name = "dgProgramme"
         Me.dgProgramme.ReadOnly = True
         Me.dgProgramme.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgProgramme.ShowEditingIcon = False
         Me.dgProgramme.Size = New System.Drawing.Size(672, 616)
         Me.dgProgramme.TabIndex = 12
+        '
+        'PronoDataGridViewTextBoxColumn
+        '
+        Me.PronoDataGridViewTextBoxColumn.DataPropertyName = "pro_no"
+        Me.PronoDataGridViewTextBoxColumn.HeaderText = "No"
+        Me.PronoDataGridViewTextBoxColumn.Name = "PronoDataGridViewTextBoxColumn"
+        Me.PronoDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'PronomDataGridViewTextBoxColumn
+        '
+        Me.PronomDataGridViewTextBoxColumn.DataPropertyName = "pro_nom"
+        Me.PronomDataGridViewTextBoxColumn.HeaderText = "Nom"
+        Me.PronomDataGridViewTextBoxColumn.Name = "PronomDataGridViewTextBoxColumn"
+        Me.PronomDataGridViewTextBoxColumn.ReadOnly = True
+        Me.PronomDataGridViewTextBoxColumn.Width = 229
+        '
+        'PronbrunitesDataGridViewTextBoxColumn
+        '
+        Me.PronbrunitesDataGridViewTextBoxColumn.DataPropertyName = "pro_nbr_unites"
+        Me.PronbrunitesDataGridViewTextBoxColumn.HeaderText = "Nbr Unités"
+        Me.PronbrunitesDataGridViewTextBoxColumn.Name = "PronbrunitesDataGridViewTextBoxColumn"
+        Me.PronbrunitesDataGridViewTextBoxColumn.ReadOnly = True
+        Me.PronbrunitesDataGridViewTextBoxColumn.Width = 150
+        '
+        'PronbrheuresDataGridViewTextBoxColumn
+        '
+        Me.PronbrheuresDataGridViewTextBoxColumn.DataPropertyName = "pro_nbr_heures"
+        Me.PronbrheuresDataGridViewTextBoxColumn.HeaderText = "Nbr Heures"
+        Me.PronbrheuresDataGridViewTextBoxColumn.Name = "PronbrheuresDataGridViewTextBoxColumn"
+        Me.PronbrheuresDataGridViewTextBoxColumn.ReadOnly = True
+        Me.PronbrheuresDataGridViewTextBoxColumn.Width = 150
         '
         'SqlSelectCommand1
         '
         Me.SqlSelectCommand1.CommandText = "SELECT        T_programme.*" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            T_programme"
         Me.SqlSelectCommand1.Connection = Me.cnProgramme
+        '
+        'cnProgramme
+        '
+        Me.cnProgramme.ConnectionString = "Data Source=.;Initial Catalog=tp_p44;Integrated Security=True"
+        Me.cnProgramme.FireInfoMessageEventOnUserErrors = False
         '
         'SqlInsertCommand1
         '
@@ -250,11 +300,6 @@ Partial Class frmProgramme
         Me.daProgramme.SelectCommand = Me.SqlSelectCommand1
         Me.daProgramme.TableMappings.AddRange(New System.Data.Common.DataTableMapping() {New System.Data.Common.DataTableMapping("Table", "T_programme", New System.Data.Common.DataColumnMapping() {New System.Data.Common.DataColumnMapping("pro_no", "pro_no"), New System.Data.Common.DataColumnMapping("pro_nom", "pro_nom"), New System.Data.Common.DataColumnMapping("pro_nbr_unites", "pro_nbr_unites"), New System.Data.Common.DataColumnMapping("pro_nbr_heures", "pro_nbr_heures")})})
         Me.daProgramme.UpdateCommand = Me.SqlUpdateCommand1
-        '
-        'cnProgramme
-        '
-        Me.cnProgramme.ConnectionString = "Data Source=.;Initial Catalog=tp_p44;Integrated Security=True"
-        Me.cnProgramme.FireInfoMessageEventOnUserErrors = False
         '
         'SqlSelectCommand2
         '
@@ -291,11 +336,6 @@ Partial Class frmProgramme
         Me.daEtudiants.TableMappings.AddRange(New System.Data.Common.DataTableMapping() {New System.Data.Common.DataTableMapping("Table", "T_etudiants", New System.Data.Common.DataColumnMapping() {New System.Data.Common.DataColumnMapping("etu_da", "etu_da"), New System.Data.Common.DataColumnMapping("pro_no", "pro_no"), New System.Data.Common.DataColumnMapping("etu_prenom", "etu_prenom"), New System.Data.Common.DataColumnMapping("etu_nom", "etu_nom")})})
         Me.daEtudiants.UpdateCommand = Me.SqlUpdateCommand2
         '
-        'ProgrammeBindingSource
-        '
-        Me.ProgrammeBindingSource.DataMember = "T_programme"
-        Me.ProgrammeBindingSource.DataSource = Me.DsProgramme1
-        '
         'dgEtudiants
         '
         Me.dgEtudiants.AllowUserToAddRows = False
@@ -304,7 +344,7 @@ Partial Class frmProgramme
         Me.dgEtudiants.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgEtudiants.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgEtudiants.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EtudaDataGridViewTextBoxColumn, Me.PronoDataGridViewTextBoxColumn1, Me.EtuprenomDataGridViewTextBoxColumn, Me.EtunomDataGridViewTextBoxColumn})
-        Me.dgEtudiants.DataBindings.Add(New System.Windows.Forms.Binding("Tag", Me.ProgrammeBindingSource, "pro_no", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.dgEtudiants.DataBindings.Add(New System.Windows.Forms.Binding("Tag", Me.TetudiantsBindingSource, "pro_no", True))
         Me.dgEtudiants.DataSource = Me.TetudiantsBindingSource
         Me.dgEtudiants.Location = New System.Drawing.Point(702, 25)
         Me.dgEtudiants.Name = "dgEtudiants"
@@ -312,47 +352,6 @@ Partial Class frmProgramme
         Me.dgEtudiants.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgEtudiants.Size = New System.Drawing.Size(684, 828)
         Me.dgEtudiants.TabIndex = 13
-        '
-        'TetudiantsBindingSource
-        '
-        Me.TetudiantsBindingSource.DataMember = "T_etudiants"
-        Me.TetudiantsBindingSource.DataSource = Me.DsProgramme1
-        '
-        'DsProgramme1
-        '
-        Me.DsProgramme1.DataSetName = "DsProgramme"
-        Me.DsProgramme1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'PronoDataGridViewTextBoxColumn
-        '
-        Me.PronoDataGridViewTextBoxColumn.DataPropertyName = "pro_no"
-        Me.PronoDataGridViewTextBoxColumn.HeaderText = "No"
-        Me.PronoDataGridViewTextBoxColumn.Name = "PronoDataGridViewTextBoxColumn"
-        Me.PronoDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'PronomDataGridViewTextBoxColumn
-        '
-        Me.PronomDataGridViewTextBoxColumn.DataPropertyName = "pro_nom"
-        Me.PronomDataGridViewTextBoxColumn.HeaderText = "Nom"
-        Me.PronomDataGridViewTextBoxColumn.Name = "PronomDataGridViewTextBoxColumn"
-        Me.PronomDataGridViewTextBoxColumn.ReadOnly = True
-        Me.PronomDataGridViewTextBoxColumn.Width = 229
-        '
-        'PronbrunitesDataGridViewTextBoxColumn
-        '
-        Me.PronbrunitesDataGridViewTextBoxColumn.DataPropertyName = "pro_nbr_unites"
-        Me.PronbrunitesDataGridViewTextBoxColumn.HeaderText = "Nbr Unités"
-        Me.PronbrunitesDataGridViewTextBoxColumn.Name = "PronbrunitesDataGridViewTextBoxColumn"
-        Me.PronbrunitesDataGridViewTextBoxColumn.ReadOnly = True
-        Me.PronbrunitesDataGridViewTextBoxColumn.Width = 150
-        '
-        'PronbrheuresDataGridViewTextBoxColumn
-        '
-        Me.PronbrheuresDataGridViewTextBoxColumn.DataPropertyName = "pro_nbr_heures"
-        Me.PronbrheuresDataGridViewTextBoxColumn.HeaderText = "Nbr Heures"
-        Me.PronbrheuresDataGridViewTextBoxColumn.Name = "PronbrheuresDataGridViewTextBoxColumn"
-        Me.PronbrheuresDataGridViewTextBoxColumn.ReadOnly = True
-        Me.PronbrheuresDataGridViewTextBoxColumn.Width = 150
         '
         'EtudaDataGridViewTextBoxColumn
         '
@@ -385,6 +384,15 @@ Partial Class frmProgramme
         Me.EtunomDataGridViewTextBoxColumn.ReadOnly = True
         Me.EtunomDataGridViewTextBoxColumn.Width = 200
         '
+        'TetudiantsBindingSource
+        '
+        Me.TetudiantsBindingSource.DataMember = "T_etudiants"
+        Me.TetudiantsBindingSource.DataSource = Me.DsProgramme1
+        '
+        'Err1
+        '
+        Me.Err1.ContainerControl = Me
+        '
         'frmProgramme
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 22.0!)
@@ -406,11 +414,12 @@ Partial Class frmProgramme
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.grpProgramme.ResumeLayout(False)
         Me.grpProgramme.PerformLayout()
-        CType(Me.dgProgramme, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProgrammeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DsProgramme1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgProgramme, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgEtudiants, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TetudiantsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DsProgramme1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Err1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -421,9 +430,7 @@ Partial Class frmProgramme
     Friend WithEvents cmdOK As Button
     Friend WithEvents cmdNouveau As Button
     Friend WithEvents grpProgramme As GroupBox
-    Friend WithEvents txtno As MaskedTextBox
     Friend WithEvents txtNbrHeure As TextBox
-    Friend WithEvents txtNbrUnites As TextBox
     Friend WithEvents txtNom As TextBox
     Friend WithEvents lblNbrHeure As Label
     Friend WithEvents lblNbrUnite As Label
@@ -453,4 +460,7 @@ Partial Class frmProgramme
     Friend WithEvents PronoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents EtuprenomDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents EtunomDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Err1 As ErrorProvider
+    Friend WithEvents txtNbrUnites As TextBox
+    Friend WithEvents txtno As MaskedTextBox
 End Class
