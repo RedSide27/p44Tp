@@ -5,7 +5,6 @@ Public Class frmProgramme
             daProgramme.Fill(DsProgramme1.T_programme)
             daEtudiants.SelectCommand.Parameters.Item("@NoProg").Value = ProgrammeBindingSource.Item(0).Row("pro_no")
             daEtudiants.Fill(DsProgramme1.T_etudiants)
-            txtno.DataBindings.Add("text", ProgrammeBindingSource, "pro_no")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -109,10 +108,10 @@ Public Class frmProgramme
         Return x
     End Function
 
-    Private Sub dgProgramme_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgProgramme.CellContentClick
+    Private Sub dgProgramme_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgProgramme.CellClick
         DsProgramme1.T_etudiants.Clear()
-
         If dgEtudiants.RowCount = 0 Then
+            DsProgramme1.T_etudiants.Clear()
             daEtudiants.SelectCommand.Parameters.Item("@NoProg").Value = ProgrammeBindingSource.Current().Row("pro_no")
             daEtudiants.Fill(DsProgramme1.T_etudiants)
 

@@ -30,6 +30,7 @@ Partial Class frmProgramme
         Me.cmdOK = New System.Windows.Forms.Button()
         Me.cmdNouveau = New System.Windows.Forms.Button()
         Me.grpProgramme = New System.Windows.Forms.GroupBox()
+        Me.txtno = New System.Windows.Forms.MaskedTextBox()
         Me.ProgrammeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.DsProgramme1 = New p44Tp.DsProgramme()
         Me.txtNbrHeure = New System.Windows.Forms.TextBox()
@@ -52,7 +53,6 @@ Partial Class frmProgramme
         Me.daEtudiants = New System.Data.SqlClient.SqlDataAdapter()
         Me.TetudiantsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Err1 = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.txtno = New System.Windows.Forms.MaskedTextBox()
         Me.EtunomDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EtuprenomDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PronoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -136,6 +136,15 @@ Partial Class frmProgramme
         Me.grpProgramme.TabIndex = 6
         Me.grpProgramme.TabStop = False
         Me.grpProgramme.Text = "Programme"
+        '
+        'txtno
+        '
+        Me.txtno.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.ProgrammeBindingSource, "pro_no", True))
+        Me.txtno.Location = New System.Drawing.Point(146, 43)
+        Me.txtno.Mask = "LLL.0L"
+        Me.txtno.Name = "txtno"
+        Me.txtno.Size = New System.Drawing.Size(126, 29)
+        Me.txtno.TabIndex = 9
         '
         'ProgrammeBindingSource
         '
@@ -287,14 +296,6 @@ Partial Class frmProgramme
         '
         Me.Err1.ContainerControl = Me
         '
-        'txtno
-        '
-        Me.txtno.Location = New System.Drawing.Point(146, 43)
-        Me.txtno.Mask = "LLL.0L"
-        Me.txtno.Name = "txtno"
-        Me.txtno.Size = New System.Drawing.Size(126, 29)
-        Me.txtno.TabIndex = 9
-        '
         'EtunomDataGridViewTextBoxColumn
         '
         Me.EtunomDataGridViewTextBoxColumn.DataPropertyName = "etu_nom"
@@ -337,6 +338,7 @@ Partial Class frmProgramme
         Me.dgEtudiants.DataBindings.Add(New System.Windows.Forms.Binding("Tag", Me.TetudiantsBindingSource, "pro_no", True))
         Me.dgEtudiants.DataSource = Me.TetudiantsBindingSource
         Me.dgEtudiants.Location = New System.Drawing.Point(702, 25)
+        Me.dgEtudiants.MultiSelect = False
         Me.dgEtudiants.Name = "dgEtudiants"
         Me.dgEtudiants.ReadOnly = True
         Me.dgEtudiants.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -384,6 +386,7 @@ Partial Class frmProgramme
         Me.dgProgramme.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PronoDataGridViewTextBoxColumn, Me.PronomDataGridViewTextBoxColumn, Me.PronbrunitesDataGridViewTextBoxColumn, Me.PronbrheuresDataGridViewTextBoxColumn})
         Me.dgProgramme.DataSource = Me.ProgrammeBindingSource
         Me.dgProgramme.Location = New System.Drawing.Point(12, 237)
+        Me.dgProgramme.MultiSelect = False
         Me.dgProgramme.Name = "dgProgramme"
         Me.dgProgramme.ReadOnly = True
         Me.dgProgramme.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
