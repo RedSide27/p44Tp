@@ -30,6 +30,8 @@ Partial Class frmEtudiants
         Me.cmdOK = New System.Windows.Forms.Button()
         Me.cmdNouveau = New System.Windows.Forms.Button()
         Me.grpEtudiants = New System.Windows.Forms.GroupBox()
+        Me.EtudiantsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DsEtudiants1 = New p44Tp.DsEtudiants()
         Me.mskTel = New System.Windows.Forms.MaskedTextBox()
         Me.mskCp = New System.Windows.Forms.MaskedTextBox()
         Me.lblTelephone = New System.Windows.Forms.Label()
@@ -40,9 +42,6 @@ Partial Class frmEtudiants
         Me.lblAdresse = New System.Windows.Forms.Label()
         Me.txtVille = New System.Windows.Forms.TextBox()
         Me.lblVille = New System.Windows.Forms.Label()
-        Me.grpSexe = New System.Windows.Forms.GroupBox()
-        Me.optMasculin = New System.Windows.Forms.RadioButton()
-        Me.optFeminin = New System.Windows.Forms.RadioButton()
         Me.txtPrenom = New System.Windows.Forms.TextBox()
         Me.lblPrenom = New System.Windows.Forms.Label()
         Me.lblNoProg = New System.Windows.Forms.Label()
@@ -51,14 +50,6 @@ Partial Class frmEtudiants
         Me.lblNom = New System.Windows.Forms.Label()
         Me.lblDA = New System.Windows.Forms.Label()
         Me.dgEtudiants = New System.Windows.Forms.DataGridView()
-        Me.EtudiantsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.SqlSelectCommand1 = New System.Data.SqlClient.SqlCommand()
-        Me.SqlInsertCommand1 = New System.Data.SqlClient.SqlCommand()
-        Me.SqlUpdateCommand1 = New System.Data.SqlClient.SqlCommand()
-        Me.SqlDeleteCommand1 = New System.Data.SqlClient.SqlCommand()
-        Me.daEtudiants = New System.Data.SqlClient.SqlDataAdapter()
-        Me.cnEtudiants = New System.Data.SqlClient.SqlConnection()
-        Me.DsEtudiants1 = New p44Tp.DsEtudiants()
         Me.EtudaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PronoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EtuprenomDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -69,12 +60,22 @@ Partial Class frmEtudiants
         Me.EtuprovinceDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EtutelephoneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EtucodepostalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.txtProg = New System.Windows.Forms.MaskedTextBox()
+        Me.SqlSelectCommand1 = New System.Data.SqlClient.SqlCommand()
+        Me.cnEtudiants = New System.Data.SqlClient.SqlConnection()
+        Me.SqlInsertCommand1 = New System.Data.SqlClient.SqlCommand()
+        Me.SqlUpdateCommand1 = New System.Data.SqlClient.SqlCommand()
+        Me.SqlDeleteCommand1 = New System.Data.SqlClient.SqlCommand()
+        Me.daEtudiants = New System.Data.SqlClient.SqlDataAdapter()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.cboNoProgramme = New System.Windows.Forms.ComboBox()
+        Me.DsProgramme = New p44Tp.DsProgramme()
+        Me.TprogrammeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.grpEtudiants.SuspendLayout()
-        Me.grpSexe.SuspendLayout()
-        CType(Me.dgEtudiants, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EtudiantsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DsEtudiants1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgEtudiants, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DsProgramme, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TprogrammeBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'cmdEnlever
@@ -126,7 +127,8 @@ Partial Class frmEtudiants
         '
         'grpEtudiants
         '
-        Me.grpEtudiants.Controls.Add(Me.txtProg)
+        Me.grpEtudiants.Controls.Add(Me.cboNoProgramme)
+        Me.grpEtudiants.Controls.Add(Me.TextBox1)
         Me.grpEtudiants.Controls.Add(Me.mskTel)
         Me.grpEtudiants.Controls.Add(Me.mskCp)
         Me.grpEtudiants.Controls.Add(Me.lblTelephone)
@@ -137,7 +139,6 @@ Partial Class frmEtudiants
         Me.grpEtudiants.Controls.Add(Me.lblAdresse)
         Me.grpEtudiants.Controls.Add(Me.txtVille)
         Me.grpEtudiants.Controls.Add(Me.lblVille)
-        Me.grpEtudiants.Controls.Add(Me.grpSexe)
         Me.grpEtudiants.Controls.Add(Me.txtPrenom)
         Me.grpEtudiants.Controls.Add(Me.lblPrenom)
         Me.grpEtudiants.Controls.Add(Me.lblNoProg)
@@ -145,13 +146,22 @@ Partial Class frmEtudiants
         Me.grpEtudiants.Controls.Add(Me.txtNo)
         Me.grpEtudiants.Controls.Add(Me.lblNom)
         Me.grpEtudiants.Controls.Add(Me.lblDA)
-        Me.grpEtudiants.Enabled = False
         Me.grpEtudiants.Location = New System.Drawing.Point(12, 12)
         Me.grpEtudiants.Name = "grpEtudiants"
         Me.grpEtudiants.Size = New System.Drawing.Size(1051, 325)
         Me.grpEtudiants.TabIndex = 17
         Me.grpEtudiants.TabStop = False
         Me.grpEtudiants.Text = "Étudiants"
+        '
+        'EtudiantsBindingSource
+        '
+        Me.EtudiantsBindingSource.DataMember = "T_etudiants"
+        Me.EtudiantsBindingSource.DataSource = Me.DsEtudiants1
+        '
+        'DsEtudiants1
+        '
+        Me.DsEtudiants1.DataSetName = "DsEtudiants"
+        Me.DsEtudiants1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'mskTel
         '
@@ -193,8 +203,9 @@ Partial Class frmEtudiants
         '
         Me.cboProvince.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EtudiantsBindingSource, "etu_province", True))
         Me.cboProvince.DataBindings.Add(New System.Windows.Forms.Binding("SelectedValue", Me.EtudiantsBindingSource, "etu_province", True))
+        Me.cboProvince.DataSource = Me.TprogrammeBindingSource
+        Me.cboProvince.DisplayMember = "pro_no"
         Me.cboProvince.FormattingEnabled = True
-        Me.cboProvince.Items.AddRange(New Object() {"Alberta", "Colombie-Britanique", "Ontario", "Québec", "Nouvelle-Écosse", "Terre-Neuve-et-Labrador", "Manitoba", "Nouveau-Brunswick", "Île-du-Prince-Édouard", "Saskatchewan"})
         Me.cboProvince.Location = New System.Drawing.Point(541, 122)
         Me.cboProvince.Name = "cboProvince"
         Me.cboProvince.Size = New System.Drawing.Size(255, 30)
@@ -242,39 +253,6 @@ Partial Class frmEtudiants
         Me.lblVille.Size = New System.Drawing.Size(124, 29)
         Me.lblVille.TabIndex = 12
         Me.lblVille.Text = "Ville:"
-        '
-        'grpSexe
-        '
-        Me.grpSexe.Controls.Add(Me.optMasculin)
-        Me.grpSexe.Controls.Add(Me.optFeminin)
-        Me.grpSexe.Location = New System.Drawing.Point(146, 194)
-        Me.grpSexe.Name = "grpSexe"
-        Me.grpSexe.Size = New System.Drawing.Size(157, 117)
-        Me.grpSexe.TabIndex = 5
-        Me.grpSexe.TabStop = False
-        Me.grpSexe.Text = "Sexe"
-        '
-        'optMasculin
-        '
-        Me.optMasculin.AutoSize = True
-        Me.optMasculin.Location = New System.Drawing.Point(16, 71)
-        Me.optMasculin.Name = "optMasculin"
-        Me.optMasculin.Size = New System.Drawing.Size(108, 26)
-        Me.optMasculin.TabIndex = 1
-        Me.optMasculin.TabStop = True
-        Me.optMasculin.Text = "Masculin"
-        Me.optMasculin.UseVisualStyleBackColor = True
-        '
-        'optFeminin
-        '
-        Me.optFeminin.AutoSize = True
-        Me.optFeminin.Location = New System.Drawing.Point(16, 28)
-        Me.optFeminin.Name = "optFeminin"
-        Me.optFeminin.Size = New System.Drawing.Size(99, 26)
-        Me.optFeminin.TabIndex = 0
-        Me.optFeminin.TabStop = True
-        Me.optFeminin.Text = "Féminin"
-        Me.optFeminin.UseVisualStyleBackColor = True
         '
         'txtPrenom
         '
@@ -353,52 +331,6 @@ Partial Class frmEtudiants
         Me.dgEtudiants.Size = New System.Drawing.Size(1310, 486)
         Me.dgEtudiants.TabIndex = 23
         '
-        'EtudiantsBindingSource
-        '
-        Me.EtudiantsBindingSource.DataMember = "T_etudiants"
-        Me.EtudiantsBindingSource.DataSource = Me.DsEtudiants1
-        '
-        'SqlSelectCommand1
-        '
-        Me.SqlSelectCommand1.CommandText = "SELECT        T_etudiants.*" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            T_etudiants"
-        Me.SqlSelectCommand1.Connection = Me.cnEtudiants
-        '
-        'SqlInsertCommand1
-        '
-        Me.SqlInsertCommand1.CommandText = resources.GetString("SqlInsertCommand1.CommandText")
-        Me.SqlInsertCommand1.Connection = Me.cnEtudiants
-        Me.SqlInsertCommand1.Parameters.AddRange(New System.Data.SqlClient.SqlParameter() {New System.Data.SqlClient.SqlParameter("@etu_da", System.Data.SqlDbType.VarChar, 0, "etu_da"), New System.Data.SqlClient.SqlParameter("@pro_no", System.Data.SqlDbType.VarChar, 0, "pro_no"), New System.Data.SqlClient.SqlParameter("@etu_nom", System.Data.SqlDbType.VarChar, 0, "etu_nom"), New System.Data.SqlClient.SqlParameter("@etu_prenom", System.Data.SqlDbType.VarChar, 0, "etu_prenom"), New System.Data.SqlClient.SqlParameter("@etu_sexe", System.Data.SqlDbType.[Char], 0, "etu_sexe"), New System.Data.SqlClient.SqlParameter("@etu_adresse", System.Data.SqlDbType.VarChar, 0, "etu_adresse"), New System.Data.SqlClient.SqlParameter("@etu_ville", System.Data.SqlDbType.VarChar, 0, "etu_ville"), New System.Data.SqlClient.SqlParameter("@etu_province", System.Data.SqlDbType.VarChar, 0, "etu_province"), New System.Data.SqlClient.SqlParameter("@etu_telephone", System.Data.SqlDbType.VarChar, 0, "etu_telephone"), New System.Data.SqlClient.SqlParameter("@etu_codepostal", System.Data.SqlDbType.VarChar, 0, "etu_codepostal")})
-        '
-        'SqlUpdateCommand1
-        '
-        Me.SqlUpdateCommand1.CommandText = resources.GetString("SqlUpdateCommand1.CommandText")
-        Me.SqlUpdateCommand1.Connection = Me.cnEtudiants
-        Me.SqlUpdateCommand1.Parameters.AddRange(New System.Data.SqlClient.SqlParameter() {New System.Data.SqlClient.SqlParameter("@etu_da", System.Data.SqlDbType.VarChar, 0, "etu_da"), New System.Data.SqlClient.SqlParameter("@pro_no", System.Data.SqlDbType.VarChar, 0, "pro_no"), New System.Data.SqlClient.SqlParameter("@etu_nom", System.Data.SqlDbType.VarChar, 0, "etu_nom"), New System.Data.SqlClient.SqlParameter("@etu_prenom", System.Data.SqlDbType.VarChar, 0, "etu_prenom"), New System.Data.SqlClient.SqlParameter("@etu_sexe", System.Data.SqlDbType.[Char], 0, "etu_sexe"), New System.Data.SqlClient.SqlParameter("@etu_adresse", System.Data.SqlDbType.VarChar, 0, "etu_adresse"), New System.Data.SqlClient.SqlParameter("@etu_ville", System.Data.SqlDbType.VarChar, 0, "etu_ville"), New System.Data.SqlClient.SqlParameter("@etu_province", System.Data.SqlDbType.VarChar, 0, "etu_province"), New System.Data.SqlClient.SqlParameter("@etu_telephone", System.Data.SqlDbType.VarChar, 0, "etu_telephone"), New System.Data.SqlClient.SqlParameter("@etu_codepostal", System.Data.SqlDbType.VarChar, 0, "etu_codepostal"), New System.Data.SqlClient.SqlParameter("@Original_etu_da", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_da", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_pro_no", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "pro_no", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_etu_nom", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_nom", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_etu_prenom", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_prenom", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_sexe", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_sexe", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_sexe", System.Data.SqlDbType.[Char], 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_sexe", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_adresse", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_adresse", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_adresse", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_adresse", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_ville", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_ville", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_ville", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_ville", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_province", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_province", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_province", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_province", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_telephone", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_telephone", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_telephone", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_telephone", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_codepostal", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_codepostal", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_codepostal", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_codepostal", System.Data.DataRowVersion.Original, Nothing)})
-        '
-        'SqlDeleteCommand1
-        '
-        Me.SqlDeleteCommand1.CommandText = resources.GetString("SqlDeleteCommand1.CommandText")
-        Me.SqlDeleteCommand1.Connection = Me.cnEtudiants
-        Me.SqlDeleteCommand1.Parameters.AddRange(New System.Data.SqlClient.SqlParameter() {New System.Data.SqlClient.SqlParameter("@Original_etu_da", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_da", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_pro_no", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "pro_no", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_etu_nom", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_nom", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_etu_prenom", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_prenom", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_sexe", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_sexe", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_sexe", System.Data.SqlDbType.[Char], 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_sexe", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_adresse", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_adresse", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_adresse", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_adresse", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_ville", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_ville", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_ville", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_ville", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_province", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_province", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_province", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_province", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_telephone", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_telephone", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_telephone", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_telephone", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_codepostal", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_codepostal", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_codepostal", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_codepostal", System.Data.DataRowVersion.Original, Nothing)})
-        '
-        'daEtudiants
-        '
-        Me.daEtudiants.DeleteCommand = Me.SqlDeleteCommand1
-        Me.daEtudiants.InsertCommand = Me.SqlInsertCommand1
-        Me.daEtudiants.SelectCommand = Me.SqlSelectCommand1
-        Me.daEtudiants.TableMappings.AddRange(New System.Data.Common.DataTableMapping() {New System.Data.Common.DataTableMapping("Table", "T_etudiants", New System.Data.Common.DataColumnMapping() {New System.Data.Common.DataColumnMapping("etu_da", "etu_da"), New System.Data.Common.DataColumnMapping("pro_no", "pro_no"), New System.Data.Common.DataColumnMapping("etu_nom", "etu_nom"), New System.Data.Common.DataColumnMapping("etu_prenom", "etu_prenom"), New System.Data.Common.DataColumnMapping("etu_sexe", "etu_sexe"), New System.Data.Common.DataColumnMapping("etu_adresse", "etu_adresse"), New System.Data.Common.DataColumnMapping("etu_ville", "etu_ville"), New System.Data.Common.DataColumnMapping("etu_province", "etu_province"), New System.Data.Common.DataColumnMapping("etu_telephone", "etu_telephone"), New System.Data.Common.DataColumnMapping("etu_codepostal", "etu_codepostal")})})
-        Me.daEtudiants.UpdateCommand = Me.SqlUpdateCommand1
-        '
-        'cnEtudiants
-        '
-        Me.cnEtudiants.ConnectionString = "Data Source=.;Initial Catalog=tp_p44;Integrated Security=True"
-        Me.cnEtudiants.FireInfoMessageEventOnUserErrors = False
-        '
-        'DsEtudiants1
-        '
-        Me.DsEtudiants1.DataSetName = "DsEtudiants"
-        Me.DsEtudiants1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'EtudaDataGridViewTextBoxColumn
         '
         Me.EtudaDataGridViewTextBoxColumn.DataPropertyName = "etu_da"
@@ -476,14 +408,72 @@ Partial Class frmEtudiants
         Me.EtucodepostalDataGridViewTextBoxColumn.Name = "EtucodepostalDataGridViewTextBoxColumn"
         Me.EtucodepostalDataGridViewTextBoxColumn.ReadOnly = True
         '
-        'txtProg
+        'SqlSelectCommand1
         '
-        Me.txtProg.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EtudiantsBindingSource, "pro_no", True))
-        Me.txtProg.Location = New System.Drawing.Point(146, 82)
-        Me.txtProg.Mask = "LLL.0L"
-        Me.txtProg.Name = "txtProg"
-        Me.txtProg.Size = New System.Drawing.Size(126, 29)
-        Me.txtProg.TabIndex = 21
+        Me.SqlSelectCommand1.CommandText = "SELECT        T_etudiants.*" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            T_etudiants"
+        Me.SqlSelectCommand1.Connection = Me.cnEtudiants
+        '
+        'cnEtudiants
+        '
+        Me.cnEtudiants.ConnectionString = "Data Source=.;Initial Catalog=tp_p44;Integrated Security=True"
+        Me.cnEtudiants.FireInfoMessageEventOnUserErrors = False
+        '
+        'SqlInsertCommand1
+        '
+        Me.SqlInsertCommand1.CommandText = resources.GetString("SqlInsertCommand1.CommandText")
+        Me.SqlInsertCommand1.Connection = Me.cnEtudiants
+        Me.SqlInsertCommand1.Parameters.AddRange(New System.Data.SqlClient.SqlParameter() {New System.Data.SqlClient.SqlParameter("@etu_da", System.Data.SqlDbType.VarChar, 0, "etu_da"), New System.Data.SqlClient.SqlParameter("@pro_no", System.Data.SqlDbType.VarChar, 0, "pro_no"), New System.Data.SqlClient.SqlParameter("@etu_nom", System.Data.SqlDbType.VarChar, 0, "etu_nom"), New System.Data.SqlClient.SqlParameter("@etu_prenom", System.Data.SqlDbType.VarChar, 0, "etu_prenom"), New System.Data.SqlClient.SqlParameter("@etu_sexe", System.Data.SqlDbType.[Char], 0, "etu_sexe"), New System.Data.SqlClient.SqlParameter("@etu_adresse", System.Data.SqlDbType.VarChar, 0, "etu_adresse"), New System.Data.SqlClient.SqlParameter("@etu_ville", System.Data.SqlDbType.VarChar, 0, "etu_ville"), New System.Data.SqlClient.SqlParameter("@etu_province", System.Data.SqlDbType.VarChar, 0, "etu_province"), New System.Data.SqlClient.SqlParameter("@etu_telephone", System.Data.SqlDbType.VarChar, 0, "etu_telephone"), New System.Data.SqlClient.SqlParameter("@etu_codepostal", System.Data.SqlDbType.VarChar, 0, "etu_codepostal")})
+        '
+        'SqlUpdateCommand1
+        '
+        Me.SqlUpdateCommand1.CommandText = resources.GetString("SqlUpdateCommand1.CommandText")
+        Me.SqlUpdateCommand1.Connection = Me.cnEtudiants
+        Me.SqlUpdateCommand1.Parameters.AddRange(New System.Data.SqlClient.SqlParameter() {New System.Data.SqlClient.SqlParameter("@etu_da", System.Data.SqlDbType.VarChar, 0, "etu_da"), New System.Data.SqlClient.SqlParameter("@pro_no", System.Data.SqlDbType.VarChar, 0, "pro_no"), New System.Data.SqlClient.SqlParameter("@etu_nom", System.Data.SqlDbType.VarChar, 0, "etu_nom"), New System.Data.SqlClient.SqlParameter("@etu_prenom", System.Data.SqlDbType.VarChar, 0, "etu_prenom"), New System.Data.SqlClient.SqlParameter("@etu_sexe", System.Data.SqlDbType.[Char], 0, "etu_sexe"), New System.Data.SqlClient.SqlParameter("@etu_adresse", System.Data.SqlDbType.VarChar, 0, "etu_adresse"), New System.Data.SqlClient.SqlParameter("@etu_ville", System.Data.SqlDbType.VarChar, 0, "etu_ville"), New System.Data.SqlClient.SqlParameter("@etu_province", System.Data.SqlDbType.VarChar, 0, "etu_province"), New System.Data.SqlClient.SqlParameter("@etu_telephone", System.Data.SqlDbType.VarChar, 0, "etu_telephone"), New System.Data.SqlClient.SqlParameter("@etu_codepostal", System.Data.SqlDbType.VarChar, 0, "etu_codepostal"), New System.Data.SqlClient.SqlParameter("@Original_etu_da", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_da", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_pro_no", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "pro_no", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_etu_nom", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_nom", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_etu_prenom", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_prenom", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_sexe", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_sexe", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_sexe", System.Data.SqlDbType.[Char], 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_sexe", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_adresse", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_adresse", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_adresse", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_adresse", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_ville", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_ville", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_ville", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_ville", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_province", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_province", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_province", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_province", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_telephone", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_telephone", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_telephone", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_telephone", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_codepostal", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_codepostal", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_codepostal", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_codepostal", System.Data.DataRowVersion.Original, Nothing)})
+        '
+        'SqlDeleteCommand1
+        '
+        Me.SqlDeleteCommand1.CommandText = resources.GetString("SqlDeleteCommand1.CommandText")
+        Me.SqlDeleteCommand1.Connection = Me.cnEtudiants
+        Me.SqlDeleteCommand1.Parameters.AddRange(New System.Data.SqlClient.SqlParameter() {New System.Data.SqlClient.SqlParameter("@Original_etu_da", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_da", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_pro_no", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "pro_no", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_etu_nom", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_nom", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@Original_etu_prenom", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_prenom", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_sexe", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_sexe", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_sexe", System.Data.SqlDbType.[Char], 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_sexe", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_adresse", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_adresse", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_adresse", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_adresse", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_ville", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_ville", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_ville", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_ville", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_province", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_province", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_province", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_province", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_telephone", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_telephone", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_telephone", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_telephone", System.Data.DataRowVersion.Original, Nothing), New System.Data.SqlClient.SqlParameter("@IsNull_etu_codepostal", System.Data.SqlDbType.Int, 0, System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "etu_codepostal", System.Data.DataRowVersion.Original, True, Nothing, "", "", ""), New System.Data.SqlClient.SqlParameter("@Original_etu_codepostal", System.Data.SqlDbType.VarChar, 0, System.Data.ParameterDirection.Input, False, CType(0, Byte), CType(0, Byte), "etu_codepostal", System.Data.DataRowVersion.Original, Nothing)})
+        '
+        'daEtudiants
+        '
+        Me.daEtudiants.DeleteCommand = Me.SqlDeleteCommand1
+        Me.daEtudiants.InsertCommand = Me.SqlInsertCommand1
+        Me.daEtudiants.SelectCommand = Me.SqlSelectCommand1
+        Me.daEtudiants.TableMappings.AddRange(New System.Data.Common.DataTableMapping() {New System.Data.Common.DataTableMapping("Table", "T_etudiants", New System.Data.Common.DataColumnMapping() {New System.Data.Common.DataColumnMapping("etu_da", "etu_da"), New System.Data.Common.DataColumnMapping("pro_no", "pro_no"), New System.Data.Common.DataColumnMapping("etu_nom", "etu_nom"), New System.Data.Common.DataColumnMapping("etu_prenom", "etu_prenom"), New System.Data.Common.DataColumnMapping("etu_sexe", "etu_sexe"), New System.Data.Common.DataColumnMapping("etu_adresse", "etu_adresse"), New System.Data.Common.DataColumnMapping("etu_ville", "etu_ville"), New System.Data.Common.DataColumnMapping("etu_province", "etu_province"), New System.Data.Common.DataColumnMapping("etu_telephone", "etu_telephone"), New System.Data.Common.DataColumnMapping("etu_codepostal", "etu_codepostal")})})
+        Me.daEtudiants.UpdateCommand = Me.SqlUpdateCommand1
+        '
+        'TextBox1
+        '
+        Me.TextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EtudiantsBindingSource, "etu_sexe", True))
+        Me.TextBox1.Location = New System.Drawing.Point(146, 188)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(126, 29)
+        Me.TextBox1.TabIndex = 22
+        '
+        'cboNoProgramme
+        '
+        Me.cboNoProgramme.DataBindings.Add(New System.Windows.Forms.Binding("SelectedValue", Me.EtudiantsBindingSource, "pro_no", True))
+        Me.cboNoProgramme.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EtudiantsBindingSource, "pro_no", True))
+        Me.cboNoProgramme.DataBindings.Add(New System.Windows.Forms.Binding("SelectedItem", Me.TprogrammeBindingSource, "pro_no", True))
+        Me.cboNoProgramme.DataSource = Me.DsProgramme
+        Me.cboNoProgramme.DisplayMember = "T_programme.pro_no"
+        Me.cboNoProgramme.FormattingEnabled = True
+        Me.cboNoProgramme.Location = New System.Drawing.Point(146, 82)
+        Me.cboNoProgramme.Name = "cboNoProgramme"
+        Me.cboNoProgramme.Size = New System.Drawing.Size(126, 30)
+        Me.cboNoProgramme.TabIndex = 23
+        '
+        'DsProgramme
+        '
+        Me.DsProgramme.DataSetName = "DsProgramme"
+        Me.DsProgramme.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'TprogrammeBindingSource
+        '
+        Me.TprogrammeBindingSource.DataMember = "T_programme"
+        Me.TprogrammeBindingSource.DataSource = Me.DsProgramme
         '
         'frmEtudiants
         '
@@ -505,11 +495,11 @@ Partial Class frmEtudiants
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.grpEtudiants.ResumeLayout(False)
         Me.grpEtudiants.PerformLayout()
-        Me.grpSexe.ResumeLayout(False)
-        Me.grpSexe.PerformLayout()
-        CType(Me.dgEtudiants, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EtudiantsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DsEtudiants1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgEtudiants, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DsProgramme, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TprogrammeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -530,9 +520,6 @@ Partial Class frmEtudiants
     Friend WithEvents lblAdresse As Label
     Friend WithEvents txtVille As TextBox
     Friend WithEvents lblVille As Label
-    Friend WithEvents grpSexe As GroupBox
-    Friend WithEvents optMasculin As RadioButton
-    Friend WithEvents optFeminin As RadioButton
     Friend WithEvents txtPrenom As TextBox
     Friend WithEvents lblPrenom As Label
     Friend WithEvents lblNoProg As Label
@@ -559,5 +546,8 @@ Partial Class frmEtudiants
     Friend WithEvents EtuprovinceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents EtutelephoneDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents EtucodepostalDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents txtProg As MaskedTextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents cboNoProgramme As ComboBox
+    Friend WithEvents TprogrammeBindingSource As BindingSource
+    Friend WithEvents DsProgramme As DsProgramme
 End Class

@@ -1,10 +1,11 @@
-﻿Public Class frmProgramme
+﻿Imports System.Data.SqlClient
+Public Class frmProgramme
     Private Sub frmProgramme_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             daProgramme.Fill(DsProgramme1.T_programme)
-            'daEtudiants.SelectCommand.Parameters.Add("@NoProg", SqlDbType.VarChar, 6)
             daEtudiants.SelectCommand.Parameters.Item("@NoProg").Value = ProgrammeBindingSource.Item(0).Row("pro_no")
             daEtudiants.Fill(DsProgramme1.T_etudiants)
+            txtno.DataBindings.Add("text", ProgrammeBindingSource, "pro_no")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -25,6 +26,8 @@
                 cmdAnnuler.PerformClick()
                 Err1.Clear()
             End If
+        Catch ex As SqlException
+            MsgBox(ex.Message & " " & ex.Number)
         Catch ex As Exception
             MsgBox(ex.Message)
             DsProgramme1.T_programme.RejectChanges()
