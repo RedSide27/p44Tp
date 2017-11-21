@@ -30,7 +30,6 @@ Partial Class frmProgramme
         Me.cmdOK = New System.Windows.Forms.Button()
         Me.cmdNouveau = New System.Windows.Forms.Button()
         Me.grpProgramme = New System.Windows.Forms.GroupBox()
-        Me.txtno = New System.Windows.Forms.MaskedTextBox()
         Me.ProgrammeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.DsProgramme1 = New p44Tp.DsProgramme()
         Me.txtNbrHeure = New System.Windows.Forms.TextBox()
@@ -63,6 +62,7 @@ Partial Class frmProgramme
         Me.EtunomDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TetudiantsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Err1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.txtno = New System.Windows.Forms.TextBox()
         Me.grpProgramme.SuspendLayout()
         CType(Me.ProgrammeBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DsProgramme1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -136,15 +136,6 @@ Partial Class frmProgramme
         Me.grpProgramme.TabIndex = 6
         Me.grpProgramme.TabStop = False
         Me.grpProgramme.Text = "Programme"
-        '
-        'txtno
-        '
-        Me.txtno.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.ProgrammeBindingSource, "pro_no", True))
-        Me.txtno.Location = New System.Drawing.Point(146, 43)
-        Me.txtno.Mask = "LLL.0L"
-        Me.txtno.Name = "txtno"
-        Me.txtno.Size = New System.Drawing.Size(126, 29)
-        Me.txtno.TabIndex = 9
         '
         'ProgrammeBindingSource
         '
@@ -393,6 +384,14 @@ Partial Class frmProgramme
         '
         Me.Err1.ContainerControl = Me
         '
+        'txtno
+        '
+        Me.txtno.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.ProgrammeBindingSource, "pro_no", True))
+        Me.txtno.Location = New System.Drawing.Point(146, 41)
+        Me.txtno.Name = "txtno"
+        Me.txtno.Size = New System.Drawing.Size(128, 29)
+        Me.txtno.TabIndex = 9
+        '
         'frmProgramme
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 22.0!)
@@ -462,5 +461,5 @@ Partial Class frmProgramme
     Friend WithEvents EtunomDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Err1 As ErrorProvider
     Friend WithEvents txtNbrUnites As TextBox
-    Friend WithEvents txtno As MaskedTextBox
+    Friend WithEvents txtno As TextBox
 End Class
